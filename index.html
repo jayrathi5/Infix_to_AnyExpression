@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expression Converter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <header>
+    <div class="logo">EXP<span class="accent">↔</span>CONV</div>
+    <div class="tagline">Infix · Postfix · Prefix</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Expression<br/><span class="outline">Converter</span></h1>
+      <p class="subtitle">Transform infix expressions into postfix &amp; prefix notation using stack-based algorithms.</p>
+    </section>
+
+    <section class="converter-card">
+      <div class="input-group">
+        <label for="infixInput">INFIX EXPRESSION</label>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="infixInput"
+            placeholder="e.g.  A+(B*C-(D/E^F)*G)*H"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="clearBtn" title="Clear">✕</button>
+        </div>
+        <div class="hints">
+          <span>Operators: <code>+ - * / ^</code></span>
+          <span>Operands: letters or digits</span>
+        </div>
+      </div>
+
+      <button id="convertBtn" class="convert-btn">
+        <span class="btn-label">Convert</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <div class="results" id="results">
+        <div class="result-box" id="postfixBox">
+          <div class="result-label">POSTFIX</div>
+          <div class="result-value" id="postfixResult">—</div>
+          <button class="copy-btn" data-target="postfixResult" title="Copy">⧉</button>
+        </div>
+        <div class="result-box" id="prefixBox">
+          <div class="result-label">PREFIX</div>
+          <div class="result-value" id="prefixResult">—</div>
+          <button class="copy-btn" data-target="prefixResult" title="Copy">⧉</button>
+        </div>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+    </section>
+
+    <section class="steps-section" id="stepsSection" style="display:none">
+      <h2>Step-by-step <span class="accent">trace</span></h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="postfix-steps">Postfix</button>
+        <button class="tab" data-tab="prefix-steps">Prefix</button>
+      </div>
+      <div class="tab-content" id="postfix-steps">
+        <table class="trace-table">
+          <thead><tr><th>#</th><th>Symbol</th><th>Stack</th><th>Output</th></tr></thead>
+          <tbody id="postfixStepsBody"></tbody>
+        </table>
+      </div>
+      <div class="tab-content hidden" id="prefix-steps">
+        <table class="trace-table">
+          <thead><tr><th>#</th><th>Symbol</th><th>Stack</th><th>Output</th></tr></thead>
+          <tbody id="prefixStepsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <div class="info-card">
+        <div class="info-icon">①</div>
+        <h3>Infix</h3>
+        <p>Standard notation where operators sit between operands. Requires parentheses and precedence rules.</p>
+        <code>A + B * C</code>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">②</div>
+        <h3>Postfix</h3>
+        <p>Operators follow their operands. No parentheses needed. Directly executable by stack machines.</p>
+        <code>A B C * +</code>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">③</div>
+        <h3>Prefix</h3>
+        <p>Operators precede operands. Also called Polish Notation. Evaluation is unambiguous without brackets.</p>
+        <code>+ A * B C</code>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Stack-based algorithm · No external dependencies · <a href="https://github.com/" target="_blank">GitHub</a></p>
+  </footer>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script src="converter.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
